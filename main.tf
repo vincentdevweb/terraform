@@ -10,15 +10,20 @@ provider "docker" {
   host = "npipe:////.//pipe//docker_engine"
 }
 
-resource "docker_image" "nginx" {
-  name         = "nginx:latest"
+# resource "docker_image" "nginx" {
+#   name         = "nginx:latest"
+#   keep_locally = false
+# }
+
+resource "docker_image" "ubuntu" {
+  name         = "ubuntu:latest"
   keep_locally = false
 }
 
 # Ressource Docker
-resource "docker_container" "my_container_nginx" {
-  name  = var.container_nginx     # Nom du conteneur
-  image = docker_image.nginx.name # Image Docker à utiliser
+resource "docker_container" "container_controlleur_ubuntu" {
+  name  = var.container_controlleur_ubuntu    # Nom du conteneur
+  image = docker_image.ubuntu.name # Image Docker à utiliser
 
   # Options supplémentaires du conteneur
   ports {
@@ -27,13 +32,25 @@ resource "docker_container" "my_container_nginx" {
   }
 }
 
-output "container_id" {
-  description = "ID of the Docker container"
-  value       = docker_container.my_container_nginx.id
+resource "docker_container" "container_M2_ubuntu" {
+  name  = var.container_M2_ubuntu   # Nom du conteneur
+  image = docker_image.ubuntu.name # Image Docker à utiliser
+
+  # Options supplémentaires du conteneur
+  ports {
+    internal = 80
+    external = 8082
+  }
 }
 
-output "image_id" {
-  description = "ID of the Docker image"
-  value       = docker_image.nginx.id
+resource "docker_container" "container_M1_ubuntu" {
+  name  = var.container_M1_ubuntu   # Nom du conteneur
+  image = docker_image.ubuntu.name # Image Docker à utiliser
+
+  # Options supplémentaires du conteneur
+  ports {
+    internal = 80
+    external = 8083
+  }
 }
 
