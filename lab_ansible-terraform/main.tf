@@ -79,7 +79,7 @@ resource "docker_container" "managed_node" {
   }
 
     provisioner "local-exec" {
-    command = "docker exec managed${count.index + 1} /shared_volume/bootstrap.sh"
+    command = "docker exec ${self.name} /shared_volume/bootstrap.sh"
   }
 
     # Dépendance explicite sur les ressources docker_container
