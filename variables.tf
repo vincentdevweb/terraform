@@ -6,15 +6,21 @@ variable "container_nginx" {
 variable "container_controlleur_ubuntu" {
   description = "name of docker ubuntu container controlleur"
   type        = string
-  default     = "controlleur"
+  default     = "controller"
 }
-variable "container_M1_ubuntu" {
+variable "container_managed1_ubuntu" {
   description = "name of docker ubuntu container M1"
   type        = string
-  default     = "M1"
+  default     = "managed1"
 }
-variable "container_M2_ubuntu" {
+variable "container_managed2_ubuntu" {
   description = "name of docker ubuntu container M2"
   type        = string
-  default     = "M2"
+  default     = "managed2"
+}
+
+variable "host_path" {
+  description = "Chemin d'hôte"
+  type        = string
+  default     = "C:\\Users\\Administrateur\\Desktop\\AWS\\terraform"
 }
