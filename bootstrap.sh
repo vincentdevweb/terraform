@@ -1,4 +1,4 @@
-#!/usr/bin/env: use -[v]S
+#!/usr/bin/env: bash
 apt update && apt upgrade -y
 apt -y install openssh-client openssh-server
 # Active L'authentification 

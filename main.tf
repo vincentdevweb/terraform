@@ -1,7 +1,7 @@
 terraform {
   required_providers {
     docker = {
-      source = "kreuzwerker/docker"
+      source  = "kreuzwerker/docker"
     }
   }
 }
@@ -33,11 +33,6 @@ resource "docker_container" "controller" {
     container_path = "/shared_volume"
   }
   # Options supplémentaires du conteneur
-  ports {
-    internal = 80
-    external = 8081
-    ip       = "0.0.0.0" # Pour lier à toutes les adresses IP disponibles
-  }
   networks_advanced {
     name = docker_network.private_network.name
   }
@@ -53,10 +48,6 @@ resource "docker_container" "managed2" {
     volume_name    = docker_volume.shared_volume.name
     container_path = "/shared_volume"
   }
-  ports {
-    internal = 80
-    external = 8082
-  }
   networks_advanced {
     name = docker_network.private_network.name
   }
@@ -70,10 +61,6 @@ resource "docker_container" "managed1" {
   volumes {
     volume_name    = docker_volume.shared_volume.name
     container_path = "/shared_volume"
-  }
-  ports {
-    internal = 80
-    external = 8083
   }
   networks_advanced {
     name = docker_network.private_network.name
